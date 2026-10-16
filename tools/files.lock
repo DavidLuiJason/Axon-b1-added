@@ -1,6 +1,6 @@
 {
  "version": 2,
- "seal": "cd504d455cb99528711086dc7270eb1c3ad3752d56fb453cedd8c9da8de57489",
+ "seal": "73f26c60871bf547cb904ff274b5ec6ea2569877dfc14c330d8799fa4df92544",
  "dictionaries": [
   "public/dictionary/en"
  ],
@@ -441,6 +441,24 @@
   "src/tokens/designTokens.ts": {
    "bytes": 2345
   },
+  "src/tools/engines/numbers/baseConvert.ts": {
+   "bytes": 1319
+  },
+  "src/tools/engines/numbers/calculator.ts": {
+   "bytes": 6898
+  },
+  "src/tools/engines/numbers/index.ts": {
+   "bytes": 572
+  },
+  "src/tools/engines/numbers/numberToWords.ts": {
+   "bytes": 3055
+  },
+  "src/tools/engines/numbers/percentage.ts": {
+   "bytes": 2261
+  },
+  "src/tools/engines/numbers/unitConvert.ts": {
+   "bytes": 4063
+  },
   "src/tools/engines/text/caseConvert.ts": {
    "bytes": 2733
   },
@@ -551,6 +569,9 @@
   },
   "tests/tools.test.ts": {
    "bytes": 13833
+  },
+  "tests/toolsNumbers.test.ts": {
+   "bytes": 7811
   },
   "tests/toolsText.test.ts": {
    "bytes": 8491
