@@ -7,8 +7,10 @@
 import type { BrainProvider, BrainRequest } from '../types';
 import { maskCodeRegions } from '../symbols/protect';
 import { classifySymbolRoles } from '../symbols/symbolRoles';
-import type { MindContext, MindStage, Segment, StageId, StageState, Token } from './types';
+import type { MindContext, MindStage, Segment, StageId, StageState } from './types';
 import { createLegacyExecutor } from './legacy';
+import { dictionarySlot } from '../knowledge/dictionarySlot';
+import { createAnalyzer } from './analysis/analyze';
 
 function withEntry(context: MindContext, stage: StageId, state: StageState, note: string, patch: Partial<MindContext> = {}): MindContext {
   return { ...context, ...patch, entries: [...context.entries, { stage, state, note }] };
@@ -52,27 +54,6 @@ function makeSegments(text: string): { segments: Segment[]; note: string } {
   }
 }
 
-function tokenize(segments: Segment[]): Token[] {
-  const tokens: Token[] = [];
-  for (const segment of segments) {
-    if (segment.kind !== 'language') continue;
-    let i = 0;
-    while (i < segment.text.length) {
-      while (i < segment.text.length && isWhitespace(segment.text.charCodeAt(i))) i++;
-      if (i >= segment.text.length) break;
-      const start = i;
-      while (i < segment.text.length && !isWhitespace(segment.text.charCodeAt(i))) i++;
-      const surface = segment.text.slice(start, i);
-      tokens.push({ surface, lemma: surface.toLowerCase(), start: segment.start + start, end: segment.start + i });
-    }
-  }
-  return tokens;
-}
-
-function isWhitespace(code: number): boolean {
-  return code === 32 || code === 9 || code === 10 || code === 13 || code === 11 || code === 12 || code === 0xA0 || code === 0x2028 || code === 0x2029;
-}
-
 export function createStages(executor: ReturnType<typeof createLegacyExecutor>, now: () => number, nextId: () => string): MindStage[] {
   function intake(context: MindContext): MindContext {
     const utterance = { id: nextId(), text: context.utterance.text, place: context.utterance.place, at: now() };
@@ -82,9 +63,13 @@ export function createStages(executor: ReturnType<typeof createLegacyExecutor>, 
     const read = makeSegments(context.utterance.text);
     return withEntry(context, 'reading', 'ran', read.note, { analysis: { segments: read.segments, tokens: [] } });
   }
-  function analysis(context: MindContext): MindContext {
+  async function analysis(context: MindContext): Promise<MindContext> {
+    const analyze = createAnalyzer(dictionarySlot, { maxLookups: 64, maxPhraseWords: 5 });
     const segments = context.analysis?.segments ?? [{ kind: 'language' as const, text: context.utterance.text, start: 0, end: context.utterance.text.length }];
-    return withEntry(context, 'analysis', 'ran', 'placeholder lemma; tokens split on whitespace', { analysis: { segments, tokens: tokenize(segments) } });
+    const result = await analyze(segments);
+    if (!result.ok) return withEntry(context, 'analysis', 'ran', `analysis unavailable: ${result.error}`, { analysis: { segments, tokens: [] } });
+    const note = `dictionary analysis; ${result.metrics.lookupCalls} lookups, ${result.metrics.cacheHits} cache hits${result.metrics.budgetExhausted ? ', budget exhausted' : ''}`;
+    return withEntry(context, 'analysis', 'ran', note, { analysis: { segments, tokens: result.tokens, metrics: result.metrics } });
   }
   function meaning(context: MindContext): MindContext {
     return withEntry(context, 'meaning', 'not-built', 'not built: speech acts arrive in B3', { frame: { act: 'unknown', confidence: 0 } });

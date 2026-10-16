@@ -10,8 +10,23 @@ export type StageId = 'intake' | 'reading' | 'analysis' | 'meaning' | 'resolutio
 export type StageState = 'ran' | 'passed-through' | 'not-built';
 export interface Utterance { id: string; text: string; place: Place; at: number }
 export interface Segment { kind: 'language' | 'material'; text: string; start: number; end: number }
-export interface Token { surface: string; lemma: string; start: number; end: number }
-export interface Analysis { segments: Segment[]; tokens: Token[] }
+export interface Token {
+  surface: string;
+  lemma: string;
+  alternativeLemmas?: string[];
+  start: number;
+  end: number;
+  knowledge?: 'known' | 'unknown' | 'not-checked';
+  partsOfSpeech?: string[];
+  synsetIds?: string[];
+  morphology?: { via: 'irregular' | 'rule'; rule: string };
+  entry?: { surface: string; start: number; end: number };
+}
+export interface Analysis {
+  segments: Segment[];
+  tokens: Token[];
+  metrics?: { lookupCalls: number; cacheHits: number; budget: number; budgetExhausted: boolean; budgetUnits?: number };
+}
 export type SpeechAct = 'unknown';
 export interface Frame { act: SpeechAct; confidence: number }
 export interface TraceEntry { stage: StageId; state: StageState; note: string }
