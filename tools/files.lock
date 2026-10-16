@@ -1,6 +1,6 @@
 {
  "version": 2,
- "seal": "8e52671c5ba5831b77ee54f7ccb47cdacb8917530b0d572d63b6caac8c3c9653",
+ "seal": "2e42dea9cd972656b3c8437f34f64ac4a5aa89038e28b2086b491640f6bf437b",
  "dictionaries": [
   "public/dictionary/en"
  ],
@@ -91,6 +91,12 @@
   },
   "docs/PHASE_G_LOCAL_EVIDENCE.md": {
    "bytes": 4380
+  },
+  "docs/ROADMAP.md": {
+   "bytes": 37545
+  },
+  "docs/archive/AXON_ROADMAP_V15_1.md": {
+   "bytes": 303060
   },
   "index.html": {
    "bytes": 1290
@@ -590,6 +596,9 @@
   },
   "tests/packDictionary.test.py": {
    "bytes": 496
+  },
+  "tests/roadmapSize.test.ts": {
+   "bytes": 1714
   },
   "tests/snapshot.test.mjs": {
    "bytes": 3137
