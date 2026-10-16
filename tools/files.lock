@@ -1,6 +1,6 @@
 {
  "version": 2,
- "seal": "a3367417da76aaab3d8b4eb447e04966e14852a2e7636ea0341a1e00bf052939",
+ "seal": "cd504d455cb99528711086dc7270eb1c3ad3752d56fb453cedd8c9da8de57489",
  "dictionaries": [
   "public/dictionary/en"
  ],
@@ -210,6 +210,12 @@
   "src/brain/matcher.ts": {
    "bytes": 1999
   },
+  "src/brain/mind/analysis/analyze.ts": {
+   "bytes": 10763
+  },
+  "src/brain/mind/analysis/needs.ts": {
+   "bytes": 1201
+  },
   "src/brain/mind/index.ts": {
    "bytes": 379
   },
@@ -342,6 +348,15 @@
   "src/components/buildDetails.ts": {
    "bytes": 3222
   },
+  "src/components/editors/AudioEditorScreen.tsx": {
+   "bytes": 1852
+  },
+  "src/components/editors/ImageEditorScreen.tsx": {
+   "bytes": 1852
+  },
+  "src/components/editors/VideoEditorScreen.tsx": {
+   "bytes": 1852
+  },
   "src/crash/crashLog.ts": {
    "bytes": 8710
   },
@@ -426,6 +441,24 @@
   "src/tokens/designTokens.ts": {
    "bytes": 2345
   },
+  "src/tools/engines/text/caseConvert.ts": {
+   "bytes": 2733
+  },
+  "src/tools/engines/text/findReplace.ts": {
+   "bytes": 3231
+  },
+  "src/tools/engines/text/index.ts": {
+   "bytes": 958
+  },
+  "src/tools/engines/text/sortLines.ts": {
+   "bytes": 3852
+  },
+  "src/tools/engines/text/textCleaner.ts": {
+   "bytes": 2799
+  },
+  "src/tools/engines/text/textCompare.ts": {
+   "bytes": 4372
+  },
   "src/tools/textCounterRun.ts": {
    "bytes": 2305
   },
@@ -434,6 +467,9 @@
   },
   "src/types/index.ts": {
    "bytes": 834
+  },
+  "tests/analysis.test.ts": {
+   "bytes": 9896
   },
   "tests/askChoices.test.ts": {
    "bytes": 6407
@@ -477,6 +513,9 @@
   "tests/exportPool.test.ts": {
    "bytes": 2388
   },
+  "tests/fixtures/analysis100.json": {
+   "bytes": 7006
+  },
   "tests/fixtures/brainGolden.json": {
    "bytes": 36597
   },
@@ -512,6 +551,9 @@
   },
   "tests/tools.test.ts": {
    "bytes": 13833
+  },
+  "tests/toolsText.test.ts": {
+   "bytes": 8491
   },
   "tests/verdict.test.ts": {
    "bytes": 7351
