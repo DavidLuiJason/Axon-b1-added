@@ -1,6 +1,6 @@
 {
  "version": 2,
- "seal": "73f26c60871bf547cb904ff274b5ec6ea2569877dfc14c330d8799fa4df92544",
+ "seal": "5464099b2c70bc64c12a555067f1e4d035b4aab47fa92926c872e08d00c21751",
  "dictionaries": [
   "public/dictionary/en"
  ],
@@ -477,6 +477,21 @@
   "src/tools/engines/text/textCompare.ts": {
    "bytes": 4372
   },
+  "src/tools/engines/time/dateCalc.ts": {
+   "bytes": 7079
+  },
+  "src/tools/engines/time/index.ts": {
+   "bytes": 107
+  },
+  "src/tools/engines/time/stopwatch.ts": {
+   "bytes": 3258
+  },
+  "src/tools/engines/time/tally.ts": {
+   "bytes": 4409
+  },
+  "src/tools/engines/time/timer.ts": {
+   "bytes": 4131
+  },
   "src/tools/textCounterRun.ts": {
    "bytes": 2305
   },
@@ -575,6 +590,9 @@
   },
   "tests/toolsText.test.ts": {
    "bytes": 8491
+  },
+  "tests/toolsTime.test.ts": {
+   "bytes": 14927
   },
   "tests/verdict.test.ts": {
    "bytes": 7351
